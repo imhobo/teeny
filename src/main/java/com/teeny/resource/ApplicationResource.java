@@ -29,7 +29,7 @@ public class ApplicationResource {
 	@GET
 	@Path("/noHello")
 	public Saying dontSayHello() {
-		return new Saying(1, "Fish off!");
+		return new Saying(1, "Deployed via CI/CD webhook pipeline!");
 	}
 	
 	/**
