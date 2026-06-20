@@ -11,8 +11,8 @@ steps:
   - name: release
     image: bash
     commands:
-      - TAG="build-$(date +%Y%m%d-%H%M%S)"
-      - 'NO_PROXY="" GITHUB_TOKEN=__gh_pat__ gh release create "$TAG" target/teeny-1.0-SNAPSHOT.jar --title "$TAG" --notes "Commit: $(git rev-parse --short HEAD)"'
+      - TAG="release-$(date +%Y-%m-%d)"
+      - 'NO_PROXY="" GITHUB_TOKEN=__gh_pat__ gh release create "$TAG" target/teeny-1.0-SNAPSHOT.jar --title "Release $(date +%Y-%m-%d)" --notes "Commit: $(git rev-parse --short HEAD)"'
 
   - name: deploy
     image: bash
