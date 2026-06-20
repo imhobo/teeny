@@ -10,13 +10,10 @@ steps:
 
   - name: release
     image: bash
-    environment:
-      HTTPS_PROXY: http://10.0.0.3:14323
-      NO_PROXY: ""
-      GITHUB_TOKEN: __gh_pat__
     commands:
+      - export HTTPS_PROXY=http://10.0.0.3:14323 NO_PROXY="" GITHUB_TOKEN=__gh_pat__
       - TAG="build-$(date +%Y%m%d-%H%M%S)"
-      - gh release create "$TAG" target/teeny-1.0-SNAPSHOT.jar --title "Build $(date +%Y%m%d-%H%M%S)" --notes "Commit SHA: $CI_COMMIT_SHA"
+      - gh release create "$TAG" target/teeny-1.0-SNAPSHOT.jar --title "$TAG" --notes "Commit: $(git rev-parse --short HEAD)"
 
   - name: deploy
     image: bash
