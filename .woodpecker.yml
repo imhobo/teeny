@@ -1,0 +1,17 @@
+when:
+  event: push
+  branch: main
+
+steps:
+  - name: build
+    image: bash
+    commands:
+      - mvn package -DskipTests
+
+  - name: deploy
+    image: bash
+    commands:
+      - echo "Deploying teeny JAR to droplet..."
+      - hermes-push.sh droplet target/teeny-1.0-SNAPSHOT.jar /home/teeny/teeny-1.0-SNAPSHOT.jar
+      - hermes-ssh.sh droplet "systemctl restart teeny-backend"
+      - echo "Deployed teeny-backend"
